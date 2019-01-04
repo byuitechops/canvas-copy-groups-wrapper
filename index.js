@@ -19,15 +19,30 @@ function getCsvData() {
 		}
 	});
 
-	// you should probably sort these alphabetically because 
+	// sort the courses by name alphabetically because 
 	// of how we get the blueprint course id inside of runCourses
+	coursesToRun.sort((a, b) => {
+		if (a.name < b.name) {
+			return -1;
+		}
+		if (a.name > b.name) {
+			return 1;
+		}
+		return 0;
+	});
+
 	return coursesToRun;
 }
 
 // these directories must exist to write the log reports
 function makeDirectories() {
-	fs.mkdirSync(path.resolve('./htmlReport'));
-	fs.mkdirSync(path.resolve('./jsonReport'));
+	if (!fs.existsSync(path.resolve('./htmlReport'))) {
+		fs.mkdirSync(path.resolve('./htmlReport'));
+	}
+	
+	if (!fs.existsSync(path.resolve('./jsonReport'))) {
+		fs.mkdirSync(path.resolve('./jsonReport'));
+	}
 }
 
 async function runCourses() {
