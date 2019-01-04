@@ -1,0 +1,17 @@
+{
+  "name": "canvas-copy-groups-wrapper",
+  "version": "1.0.0",
+  "description": "A wrapper to run canvas-copy-groups on a list of courses",
+  "main": "index.js",
+  "dependencies": {
+    "canvas-api-wrapper": "^3.3.5",
+    "canvas-copy-groups": "github:byuitechops/canvas-copy-groups",
+    "d3-dsv": "^1.0.10"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node ./index.js"
+  },
+  "author": "Theron Dowdle and Seth Childers",
+  "license": "MIT"
+}
