@@ -5,16 +5,14 @@ const path = require('path');
 const canvas = require('canvas-api-wrapper');
 
 function getCsvData() {
-	const file = path.resolve('../Winter2019onlineScaledCoursesGroupReport_1546550796400.csv');
+	const file = path.resolve('../Winter2019pathwayScaledCoursesGroupReport_1546644767502.csv');
 	const fileData = fs.readFileSync(file, 'utf8');
 	let courses = d3.csvParse(fileData);
 
 	// only get the courses that you want
 	let coursesToRun = courses.filter(course => {
-		if  (course.id !== '39016' &&
-		(course.groupCategories.includes('|Project Groups|') ||
-		course.groupCategories === 'Project Groups|' ||
-		course.groupCategories === 'Grupos de Projeto|')) {
+		let hasBadGroup = /(\||^)Project\sGroups\|/gm.test(course.groupCategories);
+		if  (course.id !== '39016' && hasBadGroup) {
 			return course;
 		}
 	});
@@ -30,7 +28,7 @@ function getCsvData() {
 		}
 		return 0;
 	});
-
+	console.log(coursesToRun, coursesToRun.length)
 	return coursesToRun;
 }
 
